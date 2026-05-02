@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Story - Fixed Layout</title>
+    <title>Our Story - Music & Fixed Layout</title>
     <style>
         * {
             margin: 0;
@@ -30,7 +30,7 @@
             width: 150px;
             height: 220px;
             position: absolute;
-            top: 70%; /* Posisi thumbnail */
+            top: 70%; 
             transform: translateY(-50%);
             border-radius: 15px;
             background-position: center;
@@ -50,16 +50,16 @@
             border-radius: 0;
         }
 
-        /* Jarak Thumbnail di Desktop biar gak numpuk */
+        /* Jarak Thumbnail di Desktop */
         .slide .item:nth-child(3) { left: 50%; }
         .slide .item:nth-child(4) { left: calc(50% + 170px); }
         .slide .item:nth-child(5) { left: calc(50% + 340px); }
         .slide .item:nth-child(n + 6) { left: calc(50% + 510px); opacity: 0; }
 
-        /* TEKS - Sekarang pakai jarak dari BOTTOM agar stabil */
+        /* TEKS */
         .item .content {
             position: absolute;
-            bottom: 180px; /* Jarak aman di atas thumbnail */
+            bottom: 180px; 
             left: 50%;
             transform: translateX(-50%);
             width: 90%;
@@ -122,7 +122,7 @@
             color: #000;
         }
 
-        /* FIX BUAT MOBILE AGAR TIDAK TERLALU KE BAWAH */
+        /* Responsive Mobile */
         @media screen and (max-width: 600px) {
             .slide .item {
                 width: 100px;
@@ -132,10 +132,7 @@
             .slide .item:nth-child(3) { left: 30%; }
             .slide .item:nth-child(4) { left: calc(30% + 110px); }
             .slide .item:nth-child(5) { left: calc(30% + 220px); }
-            
-            .item .content {
-                bottom: 220px;
-            }
+            .item .content { bottom: 220px; }
         }
     </style>
 </head>
@@ -146,31 +143,31 @@
             <div class="item" style="background-image: url('Foto1.jpg');">
                 <div class="content">
                     <div class="name">OUR STORY</div>
-                    <div class="des">The beginning of something beautiful.</div>
+                    <div class="des">Dan sekarang, aku udah di titik nggak mau berharap apa-apa lagi. aku udah capek sama ekspektasi aku sendiri. Jadi ya udah, aku pasrah sama keadaan dan lebih milih buat jalan sendiri-sendiri aja sekarang.</div>
                 </div>
             </div>
             <div class="item" style="background-image: url('Foto2.jpg');">
                 <div class="content">
                     <div class="name">NIGHT VIBES</div>
-                    <div class="des">Under the city lights with you.</div>
+                    <div class="des">Dari hari pertama kita ketemu, (Klik ➔ untuk lanjut) .</div>
                 </div>
             </div>
             <div class="item" style="background-image: url('Foto3.jpg');">
                 <div class="content">
                     <div class="name">MEMORIES</div>
-                    <div class="des">Captured moments that last forever.</div>
+                    <div class="des">Inget nggak pas awal kita ketemu? aku nggak bohong, dari detik itu gue udah ngerasa ada yang beda sama kamu. kamu punya daya tarik yang bikin aku langsung pengen kenal lebih jauh.</div>
                 </div>
             </div>
             <div class="item" style="background-image: url('Foto4.jpg');">
                 <div class="content">
                     <div class="name">SMILE</div>
-                    <div class="des">Your laugh is my favorite soundtrack.</div>
+                    <div class="des">Lama-lama kita jadi sedekat ini, dan jujur, ngobrol sama kamu itu bisa nyambung sama-sama suka kdrama kpop dll dari pada sama yang lain wkwk.</div>
                 </div>
             </div>
             <div class="item" style="background-image: url('Foto5.jpg');">
                 <div class="content">
                     <div class="name">FOREVER</div>
-                    <div class="des">To many more adventures ahead.</div>
+                    <div class="des">"Aku sempat ada di titik di mana perhatian aku ke kamu udah bukan sebagai temen biasa. Tiap ada hal apa pun, aku pasti nanya kabar. dan beneran harapan itu habis karna dimakan waktu.</div>
                 </div>
             </div>
         </div>
@@ -181,16 +178,34 @@
         </div>
     </div>
 
+    <audio id="myMusic" loop>
+        <source src="yung-kai-blue-Official-Music-Video.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
         let next = document.querySelector('.next')
         let prev = document.querySelector('.prev')
+        let music = document.getElementById('myMusic')
+        let isPlaying = false
+
+        // Fungsi buat start musik sekali aja pas klik
+        function startMusic() {
+            if (!isPlaying) {
+                music.play().catch(error => {
+                    console.log("Musik baru bisa jalan setelah klik tombol.");
+                });
+                isPlaying = true;
+            }
+        }
 
         next.addEventListener('click', function(){
+            startMusic(); // Cek musik tiap klik
             let items = document.querySelectorAll('.item')
             document.querySelector('.slide').appendChild(items[0])
         })
 
         prev.addEventListener('click', function(){
+            startMusic(); // Cek musik tiap klik
             let items = document.querySelectorAll('.item')
             document.querySelector('.slide').prepend(items[items.length - 1])
         })
