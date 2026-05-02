@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story - Center Bottom</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #000;
+            overflow: hidden;
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100vh;
+        }
+
+        /* Slide Utama */
+        .slide .item {
+            width: 180px;
+            height: 250px;
+            position: absolute;
+            top: 80%; /* Turun ke bawah */
+            transform: translateY(-50%);
+            border-radius: 20px;
+            background-position: 50% 50%;
+            background-size: cover;
+            display: inline-block;
+            transition: 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .slide .item:nth-child(1),
+        .slide .item:nth-child(2) {
+            top: 0;
+            left: 0;
+            transform: translate(0, 0);
+            border-radius: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Posisi Kotak Kecil di Bawah */
+        .slide .item:nth-child(3) { left: 55%; }
+        .slide .item:nth-child(4) { left: calc(55% + 200px); }
+        .slide .item:nth-child(5) { left: calc(55% + 400px); }
+        .slide .item:nth-child(n + 6) { left: calc(55% + 600px); opacity: 0; }
+
+        /* Teks di Tengah Bawah */
+        .item .content {
+            position: absolute;
+            bottom: 25%; /* Posisi di atas kotak kecil sedikit */
+            left: 50%;
+            transform: translateX(-50%); /* Bikin teks beneran di tengah */
+            width: 80%;
+            text-align: center; /* Teks Center */
+            color: #fff;
+            display: none;
+            z-index: 100;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.9);
+        }
+
+        .slide .item:nth-child(2) .content {
+            display: block;
+        }
+
+        .content .name {
+            font-size: clamp(35px, 7vw, 60px);
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 2px;
+            opacity: 0;
+            animation: animate 1s ease-in-out 0.2s 1 forwards;
+        }
+
+        .content .des {
+            margin: 10px auto;
+            font-size: 16px;
+            max-width: 500px;
+            font-weight: 300;
+            opacity: 0;
+            animation: animate 1s ease-in-out 0.4s 1 forwards;
+        }
+
+        @keyframes animate {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+                filter: blur(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        /* Tombol Navigasi */
+        .button {
+            width: 100%;
+            position: absolute;
+            bottom: 40px;
+            text-align: center;
+            z-index: 100;
+        }
+
+        .button button {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.4);
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .button button:hover {
+            background: #fff;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="slide">
+            <div class="item" style="background-image: url('Foto1.jpg');">
+                <div class="content">
+                    <div class="name">OUR STORY</div>
+                    <div class="des">The beginning of something beautiful together.</div>
+                </div>
+            </div>
+            <div class="item" style="background-image: url('Foto2.jpg');">
+                <div class="content">
+                    <div class="name">NIGHT VIBES</div>
+                    <div class="des">Under the city lights with you.</div>
+                </div>
+            </div>
+            <div class="item" style="background-image: url('Foto3.jpg');">
+                <div class="content">
+                    <div class="name">MEMORIES</div>
+                    <div class="des">Captured moments that last forever.</div>
+                </div>
+            </div>
+            <div class="item" style="background-image: url('Foto4.jpg');">
+                <div class="content">
+                    <div class="name">SMILE</div>
+                    <div class="des">Your laugh is my favorite soundtrack.</div>
+                </div>
+            </div>
+            <div class="item" style="background-image: url('Foto5.jpg');">
+                <div class="content">
+                    <div class="name">FOREVER</div>
+                    <div class="des">To many more years of happiness.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="button">
+            <button class="prev">❮</button>
+            <button class="next">❯</button>
+        </div>
+    </div>
+
+    <script>
+        let next = document.querySelector('.next')
+        let prev = document.querySelector('.prev')
+
+        next.addEventListener('click', function(){
+            let items = document.querySelectorAll('.item')
+            document.querySelector('.slide').appendChild(items[0])
+        })
+
+        prev.addEventListener('click', function(){
+            let items = document.querySelectorAll('.item')
+            document.querySelector('.slide').prepend(items[items.length - 1])
+        })
+    </script>
+</body>
+</html>
